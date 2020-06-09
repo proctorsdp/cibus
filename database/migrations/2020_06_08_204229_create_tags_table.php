@@ -20,15 +20,6 @@ class CreateTagsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::create('recipe_tag', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-            $table->softDeletes();
-            $table->index(['recipe_id', 'tag_id']);
-        });
     }
 
     /**

@@ -20,18 +20,6 @@ class CreateIngredientsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::create('ingredient_recipe', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
-            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->double('quantity', 2, 2);
-            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
-            $table->foreignId('direction_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-            $table->softDeletes();
-            $table->index(['ingredient_id', 'recipe_id']);
-        });
     }
 
     /**
