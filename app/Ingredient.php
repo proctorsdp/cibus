@@ -27,4 +27,9 @@ class Ingredient extends Model
     {
         return $this->belongsToMany('App\Unit', 'direction_ingredient')->using('App\DirectionIngredient')->withPivot(['quantity', 'direction_id']);
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Ingredient');
+    }
 }
