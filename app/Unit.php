@@ -25,4 +25,14 @@ class Unit extends Model
     {
         return $this->belongsToMany('App\Recipe', 'ingredient_recipe')->using('App\IngredientRecipe')->withPivot(['quantity', 'ingredient_id']);
     }
+
+    public function system()
+    {
+        return $this->belongsTo('App\System');
+    }
+
+    public function unitOf()
+    {
+        return $this->belongsTo('App\UnitOf');
+    }
 }
