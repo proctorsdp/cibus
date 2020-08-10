@@ -20,6 +20,7 @@ class CreateDirectionsTable extends Migration
             $table->text('text');
             $table->timestamps();
             $table->softDeletes();
+            $table->index(['id', 'step_number']);
         });
     }
 

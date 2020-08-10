@@ -10,3 +10,8 @@ $factory->define(RecipeTag::class, function (Faker $faker) {
         //
     ];
 });
+
+$factory->afterMaking(RecipeTag::class, function ($recipeTag, $faker) {
+    $recipeTag->recipe()->associate(App\Recipe::all()->random());
+    $recipeTag->tag()->associate(App\Tag::all()->random());
+});

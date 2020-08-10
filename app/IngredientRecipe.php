@@ -12,4 +12,19 @@ class IngredientRecipe extends Pivot
      * @var bool
      */
     public $incrementing = true;
+
+    public function ingredient()
+    {
+        return $this->belongsTo('App\Ingredient', 'ingredient_id');
+    }
+
+    public function recipe()
+    {
+        return $this->belongsTo('App\Recipe', 'recipe_id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo('App\Unit', 'unit_id');
+    }
 }

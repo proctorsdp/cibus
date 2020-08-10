@@ -11,6 +11,6 @@ class DirectionIngredientSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\DirectionIngredient::class, 150)->create();
     }
 }

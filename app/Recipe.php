@@ -35,4 +35,9 @@ class Recipe extends Model
     {
         return $this->belongsToMany('App\User', 'ratings')->using('App\Rating')->withPivot(['score', 'created_at', 'updated_at']);
     }
+
+    public function time_unit()
+    {
+        return $this->belongsTo('App\Unit', 'unit_id');
+    }
 }

@@ -12,4 +12,14 @@ class RecipeTag extends Pivot
      * @var bool
      */
     public $incrementing = true;
+
+    public function recipe()
+    {
+        return $this->belongsTo('App\Recipe', 'recipe_id');
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo('App\Tag', 'tag_id');
+    }
 }

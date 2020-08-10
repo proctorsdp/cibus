@@ -11,6 +11,6 @@ class RecipeTagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\RecipeTag::class, 50)->create();
     }
 }

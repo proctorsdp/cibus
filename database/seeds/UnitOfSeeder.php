@@ -11,6 +11,6 @@ class UnitOfSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\UnitOf::class, 15)->create();
     }
 }

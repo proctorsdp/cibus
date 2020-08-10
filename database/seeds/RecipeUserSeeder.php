@@ -11,6 +11,6 @@ class RecipeUserSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\RecipeUser::class, 50)->create();
     }
 }

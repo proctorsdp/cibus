@@ -11,6 +11,6 @@ class IngredientRecipeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\IngredientRecipe::class, 150)->create();
     }
 }

@@ -10,3 +10,8 @@ $factory->define(RecipeUser::class, function (Faker $faker) {
         //
     ];
 });
+
+$factory->afterMaking(RecipeUser::class, function ($recipeUser, $faker) {
+    $recipeUser->recipe()->associate(App\Recipe::all()->random());
+    $recipeUser->user()->associate(App\User::all()->random());
+});

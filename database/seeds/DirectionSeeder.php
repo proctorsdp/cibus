@@ -11,6 +11,6 @@ class DirectionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Direction::class, 150)->create();
     }
 }
