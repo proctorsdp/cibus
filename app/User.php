@@ -36,4 +36,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function recipes()
+    {
+        return $this->belongsToMany('App\Recipe')->using('App\RecipeUser')->withPivot(['created_at', 'updated_at']);
+    }
+
+    public function submissions()
+    {
+        return $this->hasMany('App\Recipe');
+    }
+
+    public function reviews()
+    {
+        return $this->belongsToMany('App\Recipe', 'ratings')->using('App\Rating')->withPivot(['score', 'created_at', 'updated_at']);
+    }
 }
