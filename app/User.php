@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -39,16 +39,16 @@ class User extends Authenticatable
 
     public function recipes()
     {
-        return $this->belongsToMany('App\Recipe')->using('App\RecipeUser')->withPivot(['created_at', 'updated_at']);
+        return $this->belongsToMany('App\Recipe')->using('App\RecipeUser')->withPivot(['created_at', 'updated_at'])->orderBy('title');
     }
 
     public function submissions()
     {
-        return $this->hasMany('App\Recipe');
+        return $this->hasMany('App\Recipe')->orderBy('title');
     }
 
     public function reviews()
     {
-        return $this->belongsToMany('App\Recipe', 'ratings')->using('App\Rating')->withPivot(['score', 'created_at', 'updated_at']);
+        return $this->hasMany('App\Rating')->orderBy('created_at');
     }
 }

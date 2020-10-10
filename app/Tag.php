@@ -8,6 +8,6 @@ class Tag extends Model
 {
     public function recipes()
     {
-        return $this->belongsToMany('App\Recipe')->using('App\RecipeTag');
+        return $this->belongsToMany('App\Recipe')->using('App\RecipeTag')->orderBy('title');
     }
 }

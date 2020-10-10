@@ -8,6 +8,6 @@ class UnitOf extends Model
 {
     public function units()
     {
-        return $this->hasMany('App\Unit');
+        return $this->hasMany('App\Unit')->orderBy('name');
     }
 }
