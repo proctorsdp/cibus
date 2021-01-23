@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Tag as ResourceTag;
+use App\Http\Resources\TagCollection;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -14,17 +17,13 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $pages = request('paginate') == 'false' ? 1000000 : 15;
+        $search = '%' . request('search') . '%';
+        $tags = Tag::where('name', 'LIKE', $search)
+            ->orWhere('description', 'LIKE', $search)
+            ->orderBy('name')
+            ->paginate($pages);
+        return new TagCollection($tags);
     }
 
     /**
@@ -35,9 +34,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        Tag::create($request()->validate([
-            'name' => 'required'
+        $newTag = Tag::create($request->validate([
+            'name' => 'required',
+            'description' => 'nullable'
         ]));
+
+        return new ResourceTag($newTag);
     }
 
     /**
@@ -52,17 +54,6 @@ class TagController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tag $tag)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -71,7 +62,14 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'nullable'
+        ]);
+
+        $tag->update($request->all());
+
+        return new ResourceTag($tag);
     }
 
     /**
@@ -82,6 +80,6 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        return $tag->delete();
     }
 }

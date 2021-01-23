@@ -28,7 +28,7 @@ class Recipe extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('App\Tag')->using('App\RecipeTag')->orderBy('name');
+        return $this->belongsToMany('App\Models\Tag')->using('App\RecipeTag')->orderBy('name');
     }
 
     public function ratings()

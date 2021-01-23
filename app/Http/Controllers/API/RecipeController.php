@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Recipe;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\RecipeCollection;
+use App\Http\Resources\Recipe as RecipeResource;
+use App\Recipe;
 
 class RecipeController extends Controller
 {
@@ -14,7 +17,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        return view('recipe.index', ['recipes' => Recipe::paginate()]);
+        return new RecipeCollection(Recipe::paginate());
     }
 
     /**
@@ -46,7 +49,7 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        //
+        return new RecipeResource($recipe);
     }
 
     /**

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingredient extends Model
 {
+    protected $table = 'ingredients';
+    protected $fillable = ['name', 'description', 'category_id'];
+
     public function recipes()
     {
         return $this->belongsToMany('App\Recipe')->using('App\IngredientRecipe')->withPivot(['quantity', 'unit_id', 'ingredient_id'])->orderBy('title');

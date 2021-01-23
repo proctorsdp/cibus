@@ -4,11 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// require('./bootstrap');
 
-import $ from 'jquery';
-window.$ = window.jQuery = $;
+// import $ from 'jquery';
+// window.$ = window.jQuery = $;
 
+window.axios = require('axios');
 window.Vue = require('vue');
 
 /**
@@ -21,10 +22,45 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.directive('focus', {
+	inserted: function(el) {
+		el.focus();
+	},
+});
 
 Vue.component(
-	'example-component',
-	require('./components/ExampleComponent.vue').default,
+	'paginate-component',
+	require('./components/PaginateComponent.vue').default,
+);
+
+Vue.component(
+	'tag-list',
+	require('./components/TagList.vue').default,
+);
+
+Vue.component(
+	'tag-component',
+	require('./components/TagComponent.vue').default,
+);
+
+Vue.component(
+	'ingredient-list',
+	require('./components/IngredientList.vue').default,
+);
+
+Vue.component(
+	'ingredient-component',
+	require('./components/IngredientComponent.vue').default,
+);
+
+Vue.component(
+	'category-list',
+	require('./components/CategoryList.vue').default,
+);
+
+Vue.component(
+	'category-component',
+	require('./components/CategoryComponent.vue').default,
 );
 
 Vue.component(
@@ -51,3 +87,12 @@ Vue.component(
 const app = new Vue({
 	el: '#app',
 });
+
+// (function() {
+// 	const burger = document.querySelector('.nav-toggle');
+// 	const menu = document.querySelector('.nav-menu');
+// 	burger.addEventListener('click', function() {
+// 		burger.classList.toggle('is-active');
+// 		menu.classList.toggle('is-active');
+// 	});
+// })();

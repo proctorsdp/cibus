@@ -16,8 +16,6 @@ class DirectionCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'data' => $this->collection,
-        ];
+        return $this->collection;
     }
 }

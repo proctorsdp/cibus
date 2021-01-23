@@ -4,9 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class RatingCollection extends ResourceCollection
+class CategoryCollection extends ResourceCollection
 {
-    public static $wrap = 'ratings';
+    public static $wrap = 'categories';
 
     /**
      * Transform the resource collection into an array.
